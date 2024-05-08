@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-const Sidebar = () => {
+const Sidebar = ({addReport}) => {
   const location = useLocation();
   return (
     <div className='w-[27%] px-8 py-8 font-[500] h-screen flex justify-between flex-col'>
@@ -13,7 +13,7 @@ const Sidebar = () => {
                 <li className={`${location.pathname.includes('reports') ? 'bg-slate-200 py-1.5 rounded-lg' : ''} flex items-center`}><Link to='/' className='ml-2'>Reports</Link></li>
             </ul>
         </div>
-        <button className='bg-blue-500 text-white w-full rounded-lg py-1 bottom-0'>New report</button>
+        <button className='bg-blue-500 text-white w-full rounded-lg py-1 bottom-0' onClick={() => {addReport()}}>New report</button>
     </div>
   )
 }

@@ -1,19 +1,37 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Sidebar from './Sidebar'
 import reports from '../lib/reports'
 import { Link } from 'react-router-dom'
+import { writeReportData, getReports } from '../lib/auth'
 
 const Reports = () => {
-  const [data, setData] = useState(reports);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    writeReportData(reports);
+    getReports().then((snapshot) => {
+      if(snapshot.exists()){
+        setData(snapshot.val());
+        console.log(snapshot.val());
+      }
+      else{
+        setData([]);
+      }
+    }).catch((e) => {
+      console.log(e);
+    })
+  }, []);
   const handleSearch = (searchTerm) => {
     const newData = reports.filter((report) => {
       return report.name.toLowerCase().includes(searchTerm.toLowerCase()) || report.id.includes(searchTerm);
     })
     setData(newData)
   }
+  const addReport = () => {
+    writeReportData([...data, {id: '123470', name: 'Patient', dateCreated: '4 Dec, 2008', analysis: 'Retinopathy'}]);
+  }
   return (
     <div className='flex w-full'>
-        <Sidebar />
+        <Sidebar addReport={addReport}/>
         <div className='w-[73%] py-8 px-6 h-screen overflow-y-auto'>
             <h1 className='text-4xl font-bold'>Reports</h1>
             <p className='my-4 text-slate-500'>View detailed reports on patients' retinal images and AI analysis.</p>
