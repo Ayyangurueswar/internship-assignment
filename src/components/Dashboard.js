@@ -1,16 +1,32 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Header from './Header'
-import reports from '../lib/dashboardReports';
 import { Link } from 'react-router-dom';
+import { writeDashboardData, getDashboardReports } from '../lib/auth';
+import Modal from './Modal';
+import AddReport from './AddReport';
 
 const Dashboard = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    getDashboardReports().then((snapshot) => {
+      if(snapshot.exists()){
+        const data = snapshot.val();
+        setData(data);
+        setLoading(false);
+      }
+    });
+  }, []);
   const [tab, setTab] = useState(0);
-  const [data, setData] = useState(reports);
   const handleSearch = (searchTerm) => {
-    const filteredReports = reports.filter((report) => {
+    const filteredReports = data.filter((report) => {
       return report.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
     setData(filteredReports);
+  }
+  const addReport = (report) => {
+    writeDashboardData([...data, report]);
   }
   return (
     <div>
@@ -18,7 +34,7 @@ const Dashboard = () => {
         <div className='w-3/4 mx-auto mt-10'>
             <div className='w-full flex items-center justify-between'>
                 <h1 className='text-4xl font-bold'>Dashboard</h1>
-                <button className='bg-slate-200 rounded-xl px-4 py-2 text-sm font-semibold'>New upload</button>
+                <button className='bg-slate-200 rounded-xl px-4 py-2 text-sm font-semibold' onClick={() => {setShow(true)}}>New upload</button>
             </div>
             <div className='w-full flex bg-slate-200 rounded-lg px-4 py-2 items-center gap-4 mt-8'>
                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="22" height="22" viewBox="0 0 50 50" fill='rgb(100, 116, 139)'>
@@ -45,8 +61,10 @@ const Dashboard = () => {
                         <th className='font-semibold w-1/12'>Actions</th>
                     </tr>
                     {
-                        data.map((report, index) => (
-                            <tr key={index} className={`${index !== reports.length-1 ? 'border-b border-slate-300' : ''} text-sm`}>
+                        loading ? <tr>
+                        <td className='text-2xl text-slate-600 text-center py-2' colSpan={5}>Loading...</td>
+                        </tr> : data.map((report, index) => (
+                            <tr key={index} className={`${index !== data.length-1 ? 'border-b border-slate-300' : ''} text-sm`}>
                                 <td className='px-4 py-6'>{report.name}</td>
                                 <td className='pr-4'><p className='bg-slate-200 rounded-lg px-4 py-2 block text-center font-semibold'>{report.eye}</p></td>
                                 <td className='text-slate-500 pr-4'>{report.uploaded}</td>
@@ -62,6 +80,9 @@ const Dashboard = () => {
                 <p>{tab}</p>
             )}
         </div>
+        <Modal show={show} onClose={() => {setShow(false)}} title='Add new report'>
+            <AddReport addReport={addReport}/>
+        </Modal>
     </div>
   )
 }

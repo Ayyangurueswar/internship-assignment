@@ -1,19 +1,31 @@
 import React, { useState } from 'react'
 import Header from '../Header'
 import { Link, useNavigate } from 'react-router-dom';
-import { signUp } from '../../lib/auth';
+import { useAuth } from '../../context/AuthContext';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const { signUp } = useAuth();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    signUp(email, password).then((user) => {
+    if(password !== confirmPassword){
+        alert('Passwords do not match');
+        return;
+    }
+    try {
+        setLoading(true);
+        await signUp(email, password);
         navigate("/dashboard");
-    }).catch((e) => {
+    }
+    catch (e) {
+        alert('Error: ' + e.message);
         console.log(e);
-    })
+    }
+    setLoading(false);
   }
   return (
     <div>
@@ -29,11 +41,16 @@ const SignUp = () => {
                 <div className='flex flex-col'>
                     <label htmlFor='pwd' className='text-left'>Password</label>
                     <input type='password' id='pwd' value={password} onChange={(e) => {setPassword(e.target.value)}} 
-                    className='w-full p-2 rounded border border-slate-500 outline-none' placeholder='Enter your email'/>
+                    className='w-full p-2 rounded border border-slate-500 outline-none' placeholder='Enter your password'/>
+                </div>
+                <div className='flex flex-col'>
+                    <label htmlFor='confirmpwd' className='text-left'>Confirm Password</label>
+                    <input type='password' id='pwd' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} 
+                    className='w-full p-2 rounded border border-slate-500 outline-none' placeholder='Confirm your password'/>
                 </div>
             </form>
             <div className='w-1/3'>
-                <button className='bg-blue-500 text-white py-2 font-bold text-sm rounded-lg w-full' onClick={handleSubmit}>Sign up</button>
+                <button className='bg-blue-500 text-white py-2 font-bold text-sm rounded-lg w-full' onClick={handleSubmit} disabled={loading}>Sign up</button>
                 <p className='text-sm text-slate-600 mt-3'>Already have an account? <Link to='/signin' className='underline text-blue-500'>Sign in</Link></p>
             </div>
         </div>

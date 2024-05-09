@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import Sidebar from './Sidebar'
-import reports from '../lib/reports'
 import { Link } from 'react-router-dom'
 import { writeReportData, getReports } from '../lib/auth'
 
 const Reports = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    writeReportData(reports);
     getReports().then((snapshot) => {
       if(snapshot.exists()){
         setData(snapshot.val());
+        setLoading(false);
         console.log(snapshot.val());
       }
       else{
@@ -21,13 +21,13 @@ const Reports = () => {
     })
   }, []);
   const handleSearch = (searchTerm) => {
-    const newData = reports.filter((report) => {
+    const newData = data.filter((report) => {
       return report.name.toLowerCase().includes(searchTerm.toLowerCase()) || report.id.includes(searchTerm);
     })
     setData(newData)
   }
-  const addReport = () => {
-    writeReportData([...data, {id: '123470', name: 'Patient', dateCreated: '4 Dec, 2008', analysis: 'Retinopathy'}]);
+  const addReport = (report) => {
+    writeReportData([...data, report]);
   }
   return (
     <div className='flex w-full'>
@@ -51,8 +51,10 @@ const Reports = () => {
                     <th className='font-semibold'>Actions</th>
                 </tr>
                 {
-                    data.map((report, index) => (
-                        <tr key={report.id} className={`${index !== reports.length-1 ? 'border-b border-slate-300' : ''} text-sm`}>
+                    loading ? <tr>
+                      <td className='text-2xl text-slate-600 text-center py-2' colSpan={5}>Loading...</td>
+                    </tr> : data.map((report, index) => (
+                        <tr key={report.id} className={`${'border-b border-slate-300'} text-sm`}>
                             <td className='text-slate-500 px-4 py-6'>#{report.id}</td>
                             <td>{report.name}</td>
                             <td className='text-slate-500'>{report.dateCreated}</td>

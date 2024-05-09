@@ -1,21 +1,23 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail, GoogleAuthProvider, signInWithRedirect, getRedirectResult,
+ } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getDatabase, set, ref, child, get } from "firebase/database";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDxxQwFaAtj9_Ov1hUttRHEcfm7RbGCQzk",
+    apiKey: process.env.REACT_APP_API_KEY,
     authDomain: "test-app-e72a3.firebaseapp.com",
     projectId: "test-app-e72a3",
     storageBucket: "test-app-e72a3.appspot.com",
     messagingSenderId: "811099692365",
-    appId: "1:811099692365:web:ab239b8644fdfe15c4ab04",
+    appId: process.env.REACT_APP_APP_ID,
     measurementId: "G-Z65J59QG7G",
     databaseURL: "https://test-app-e72a3-default-rtdb.firebaseio.com"
 }
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+export const auth = getAuth(app);
 const database = getDatabase(app);
+const provider = new GoogleAuthProvider();
 
 export const writeReportData = (reports) => {
     set(ref(database, 'reports'), reports);
@@ -25,12 +27,17 @@ export const getReports = () => {
     return get(child(ref(database), 'reports'));
 }
 
-export const signUp = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+export const writeDashboardData = (reports) => {
+    set(ref(database, 'dashboardReports'), reports);
 }
 
-export const signIn = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+export const getDashboardReports = () => {
+    return get(child(ref(database),'dashboardReports'));
+}
+
+export const signInWithProvider =  () => {
+    signInWithRedirect(auth, provider);
+    return getRedirectResult(auth);
 }
 
 export const resetPwd = (auth, email) => {
