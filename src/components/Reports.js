@@ -11,7 +11,6 @@ const Reports = () => {
       if(snapshot.exists()){
         setData(snapshot.val());
         setLoading(false);
-        console.log(snapshot.val());
       }
       else{
         setData([]);

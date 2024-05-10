@@ -1,5 +1,5 @@
 import Home from "./components/Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Reports from "./components/Reports";
 import Dashboard from "./components/Dashboard";
 import SignUp from "./components/auth/SignUp";
@@ -13,7 +13,7 @@ function App() {
   return (
     <AuthProvider>
       <div className="">
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/reports" element={<PrivateRoute>
@@ -29,7 +29,7 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/forgotPassword" element={<ForgotPwd />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
         <div id="modal-root"></div>
       </div>
     </AuthProvider>
