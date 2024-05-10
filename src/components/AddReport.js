@@ -14,7 +14,7 @@ const AddReport = ({addReport}) => {
     window.location.reload();
   }
   return (
-    <form className='px-8 flex flex-col gap-3 text-sm'>
+    <form className='md:px-8 px-2 flex flex-col gap-3 text-sm'>
         <div className='flex flex-col'>
             <label htmlFor='name' className='text-left'>Patient name</label>
             <input type='text' id='name' className='w-full p-2 rounded border border-slate-500 outline-none' 

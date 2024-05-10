@@ -31,7 +31,7 @@ const Reports = () => {
   return (
     <div className='flex w-full'>
         <Sidebar addReport={addReport}/>
-        <div className='w-[73%] py-8 px-6 h-screen overflow-y-auto'>
+        <div className='md:w-[73%] w-full py-8 px-6 h-screen overflow-y-auto'>
             <h1 className='text-4xl font-bold'>Reports</h1>
             <p className='my-4 text-slate-500'>View detailed reports on patients' retinal images and AI analysis.</p>
             <div className='w-full flex bg-slate-200 rounded-lg px-4 py-2 items-center gap-4'>
@@ -40,7 +40,7 @@ const Reports = () => {
                 </svg>
                 <input placeholder='Search by patient or report ID' className='placeholder:text-slate-500 bg-transparent w-full outline-none' onChange={(e) => {handleSearch(e.target.value)}}/>
             </div>
-            <div className='border rounded-xl border-slate-300 w-full mt-6'>
+            <div className='border rounded-xl border-slate-300 w-full mt-6 overflow-x-auto'>
             <table className='w-full overflow-hidden'>
                 <tr className='border-b border-slate-300 text-left'> 
                     <th className='font-semibold p-4'>Report ID</th>

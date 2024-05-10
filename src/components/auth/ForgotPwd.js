@@ -21,7 +21,7 @@ const ForgotPwd = () => {
         <Header authenticated={false}/>
         <div className='flex items-center flex-col gap-10 justify-center w-full mt-14'>
             <h1 className='text-3xl font-semibold'>Reset Password</h1>
-            <form className='flex flex-col gap-8 text-center w-1/3'>
+            <form className='flex flex-col gap-8 text-center sm:w-1/3 w-3/4'>
                 <div className='flex flex-col gap-2'>
                     <label htmlFor='email' className='text-left'>Enter your email to continue</label>
                     <input type='email' id='email' value={email} onChange={(e) => {setEmail(e.target.value)}} 

@@ -19,7 +19,7 @@ const Sidebar = ({addReport}) => {
     window.location.reload();
   }
   return (
-    <div className='w-[27%] px-8 py-8 font-[500] h-screen flex justify-between flex-col'>
+    <div className='w-[27%] px-8 py-8 font-[500] h-screen justify-between flex-col hidden md:flex'>
         <div>
             <h1 className='mb-4 text-lg'>Retinoscan AI</h1>
             <ul className='list-none ml-4 space-y-4'>

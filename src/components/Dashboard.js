@@ -31,9 +31,9 @@ const Dashboard = () => {
   return (
     <div>
         <Header authenticated={true}/>
-        <div className='w-3/4 mx-auto mt-10'>
+        <div className='sm:w-3/4 mx-auto mt-10 w-5/6'>
             <div className='w-full flex items-center justify-between'>
-                <h1 className='text-4xl font-bold'>Dashboard</h1>
+                <h1 className='sm:text-4xl text-2xl font-bold'>Dashboard</h1>
                 <button className='bg-slate-200 rounded-xl px-4 py-2 text-sm font-semibold' onClick={() => {setShow(true)}}>New upload</button>
             </div>
             <div className='w-full flex bg-slate-200 rounded-lg px-4 py-2 items-center gap-4 mt-8'>
@@ -42,7 +42,7 @@ const Dashboard = () => {
                 </svg>
                 <input placeholder='Search by patient or report ID' className='placeholder:text-slate-500 bg-transparent w-full outline-none' onChange={(e) => {handleSearch(e.target.value)}}/>
             </div>
-            <div className='w-full border-b border-slate-400 flex gap-6 mt-2'>
+            <div className='w-full border-b border-slate-400 flex gap-6 mt-2 overflow-x-auto'>
                 <button className={`font-bold py-4 text-center ${tab === 0 ? 'text-black border-b-2 border-blue-500' : 'text-slate-500'}`} onClick={() => {setTab(0)}}>All</button>
                 <button className={`font-bold py-4 text-center ${tab === 1 ? 'text-black border-b-2 border-blue-500' : 'text-slate-500'}`} onClick={() => {setTab(1)}}>Unreviewed</button>
                 <button className={`font-bold py-4 text-center ${tab === 2 ? 'text-black border-b-2 border-blue-500' : 'text-slate-500'}`} onClick={() => {setTab(2)}}>Reviewed</button>
@@ -50,13 +50,13 @@ const Dashboard = () => {
                 <button className={`font-bold py-4 text-center ${tab === 4 ? 'text-black border-b-2 border-blue-500' : 'text-slate-500'}`} onClick={() => {setTab(4)}}>Archived</button>
             </div>
             {tab === 0 ? (
-                <div className='border rounded-xl border-slate-300 w-full my-6'>
+                <div className='border rounded-xl border-slate-300 w-full my-6 overflow-x-auto'>
                 <table className='w-full overflow-hidden border-spacing-3'>
                     <tr className='border-b border-slate-300 text-left'>
                         <th className='font-semibold p-2 w-1/12 mr-2'>Patient</th>
                         <th className='font-semibold w-1/12'>Eye</th>
                         <th className='font-semibold w-[12%]'>Uploaded</th>
-                        <th className='font-semibold w-1/6'>AI insights</th>
+                        <th className='font-semibold w-1/6 text-center md:text-left'>AI insights</th>
                         <th className='font-semibold w-2/5'>Detections</th>
                         <th className='font-semibold w-1/12'>Actions</th>
                     </tr>

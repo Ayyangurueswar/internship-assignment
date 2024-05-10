@@ -26,7 +26,7 @@ const SignIn = () => {
         <Header authenticated={false}/>
         <div className='flex items-center flex-col gap-8 justify-center w-full mt-14'>
             <h1 className='text-3xl font-semibold'>Sign In</h1>
-            <form className='flex flex-col gap-4 text-center w-1/3'>
+            <form className='flex flex-col gap-4 text-center sm:w-1/3 w-3/4'>
                 <div className='flex flex-col'>
                     <label htmlFor='email' className='text-left'>Email</label>
                     <input type='email' id='email' value={email} onChange={(e) => {setEmail(e.target.value)}} 

@@ -21,11 +21,11 @@ const Header = ({authenticated}) => {
       {
         authenticated && (
           <div className='flex items-center gap-8 text-sm'>
-            <Link to='/'>Dashboard</Link>
-            <Link to='/'>AI Insights</Link>
-            <Link to='/'>Detections</Link>
-            <Link to='/'>Uploads</Link>
-            <Link to='/' className='bg-slate-200 py-2 px-4 font-semibold rounded-lg'>Help</Link>
+            <Link to='/' className='hidden md:block'>Dashboard</Link>
+            <Link to='/' className='hidden md:block'>AI Insights</Link>
+            <Link to='/' className='hidden md:block'>Detections</Link>
+            <Link to='/' className='hidden md:block'>Uploads</Link>
+            <Link to='/' className='bg-slate-200 py-2 px-4 font-semibold rounded-lg hidden md:block'>Help</Link>
             <div className='group relative'>
               <img className='rounded-full w-10 h-10' src={user_image} alt='user'/>
               <div className='px-2 py-1 border border-slate-500 rounded-md hidden absolute bg-white group-hover:block top-10 -right-6'>
