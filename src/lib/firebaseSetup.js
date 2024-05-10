@@ -4,13 +4,13 @@ import { getDatabase, set, ref, child, get } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
-    authDomain: "test-app-e72a3.firebaseapp.com",
-    projectId: "test-app-e72a3",
-    storageBucket: "test-app-e72a3.appspot.com",
-    messagingSenderId: "811099692365",
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
     appId: process.env.REACT_APP_APP_ID,
-    measurementId: "G-Z65J59QG7G",
-    databaseURL: "https://test-app-e72a3-default-rtdb.firebaseio.com"
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
 }
 
 const app = initializeApp(firebaseConfig);

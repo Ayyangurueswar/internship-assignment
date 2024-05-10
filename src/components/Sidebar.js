@@ -23,8 +23,8 @@ const Sidebar = ({addReport}) => {
         <div>
             <h1 className='mb-4 text-lg'>Retinoscan AI</h1>
             <ul className='list-none ml-4 space-y-4'>
-                <li className={`${location.pathname.includes('dashboard') ? 'bg-slate-200' : ''}`}><Link to='/dashboard' className='ml-2'>Dashboard</Link></li>
-                <li className={`${location.pathname.includes('analysis') ? 'bg-slate-200' : ''}`}><Link to='/' className='ml-2'>Analysis</Link></li>
+                <li className={`${location.pathname.includes('dashboard') ? 'bg-slate-200' : ''}`}><Link to='/dashboard' className='ml-2 w-full block'>Dashboard</Link></li>
+                <li className={`${location.pathname.includes('analysis') ? 'bg-slate-200' : ''}`}><Link to='/' className='ml-2 block'>Analysis</Link></li>
                 <li className={`${location.pathname.includes('reports') ? 'bg-slate-200 py-1.5 rounded-lg' : ''} flex items-center`}><Link to='/' className='ml-2'>Reports</Link></li>
             </ul>
         </div>

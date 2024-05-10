@@ -70,7 +70,7 @@ const Dashboard = () => {
                                 <td className='text-slate-500 pr-4'>{report.uploaded}</td>
                                 <td className='pr-6'><p className='bg-slate-200 rounded-lg px-4 py-2 block text-center font-semibold'>{report.insights}</p></td>
                                 <td className='pr-4'><p className='bg-slate-200 rounded-lg py-2 block text-center font-semibold'>{report.Detections.join(', ')}</p></td>
-                                <td><Link to='/' className='text-slate-500 font-bold'>Review</Link></td>
+                                <td><Link to='/reports' className='text-slate-500 font-bold'>Review</Link></td>
                             </tr>
                         ))
                     }
