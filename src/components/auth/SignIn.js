@@ -35,7 +35,7 @@ const SignIn = () => {
                 <div className='flex flex-col'>
                     <label htmlFor='pwd' className='text-left'>Password</label>
                     <input type='password' id='pwd' value={password} onChange={(e) => {setPassword(e.target.value)}} 
-                    className='w-full p-2 rounded border border-slate-500 outline-none' placeholder='Enter your email'/>
+                    className='w-full p-2 rounded border border-slate-500 outline-none' placeholder='Enter your password'/>
                 </div>
             </form>
             <div className='w-1/3'>

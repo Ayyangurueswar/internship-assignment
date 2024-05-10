@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Header from './Header'
 import { Link } from 'react-router-dom';
-import { writeDashboardData, getDashboardReports } from '../lib/auth';
+import { writeDashboardData, getDashboardReports } from '../lib/firebaseSetup';
 import Modal from './Modal';
 import AddReport from './AddReport';
 

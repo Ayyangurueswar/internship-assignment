@@ -3,9 +3,15 @@ import logo from '../images/retino_logo.png'
 import { Link } from 'react-router-dom'
 import user_image from '../images/user.png'
 import { useAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const Header = ({authenticated}) => {
   const {currentUser, logout} = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  }
   return (
     <div className='w-full px-8 py-4 border-b border-slate-300 flex items-center gap-2 justify-between'>
       <div className='flex items-center gap-2'>
@@ -29,7 +35,7 @@ const Header = ({authenticated}) => {
                     <Link className='block w-full' to='/editProfile'>Edit profile</Link>
                   </li>
                   <li className='p-1 hover:bg-blue-500 hover:text-white transition-colors rounded'>
-                    <button className='w-full text-left'>Logout</button>
+                    <button className='w-full text-left' onClick={handleLogout}>Logout</button>
                   </li>
                 </ul>
               </div>

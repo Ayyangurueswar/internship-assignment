@@ -6,6 +6,8 @@ import SignUp from "./components/auth/SignUp";
 import SignIn from "./components/auth/SignIn";
 import ForgotPwd from "./components/auth/ForgotPwd";
 import AuthProvider from "./context/AuthContext";
+import PrivateRoute from "./components/auth/PrivateRoute";
+import EditProfile from "./components/auth/EditProfile";
 
 function App() {
   return (
@@ -14,8 +16,15 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/reports" element={<Reports />}/>
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/reports" element={<PrivateRoute>
+              <Reports />
+            </PrivateRoute>}/>
+            <Route path="/dashboard" element={<PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>} />
+            <Route path="/editProfile" element={<PrivateRoute>
+              <EditProfile />
+            </PrivateRoute>} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/forgotPassword" element={<ForgotPwd />} />

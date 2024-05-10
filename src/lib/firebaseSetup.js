@@ -1,5 +1,4 @@
-import { getAuth, sendPasswordResetEmail, GoogleAuthProvider, signInWithRedirect, getRedirectResult,
- } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getDatabase, set, ref, child, get } from "firebase/database";
 
@@ -17,7 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 const database = getDatabase(app);
-const provider = new GoogleAuthProvider();
 
 export const writeReportData = (reports) => {
     set(ref(database, 'reports'), reports);
@@ -33,13 +31,4 @@ export const writeDashboardData = (reports) => {
 
 export const getDashboardReports = () => {
     return get(child(ref(database),'dashboardReports'));
-}
-
-export const signInWithProvider =  () => {
-    signInWithRedirect(auth, provider);
-    return getRedirectResult(auth);
-}
-
-export const resetPwd = (auth, email) => {
-    return sendPasswordResetEmail(auth, email);
 }

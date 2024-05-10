@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Sidebar from './Sidebar'
 import { Link } from 'react-router-dom'
-import { writeReportData, getReports } from '../lib/auth'
+import { writeReportData, getReports } from '../lib/firebaseSetup'
 
 const Reports = () => {
   const [data, setData] = useState([]);
