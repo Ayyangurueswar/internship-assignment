@@ -63,16 +63,22 @@ const Dashboard = () => {
                     {
                         loading ? <tr>
                         <td className='text-2xl text-slate-600 text-center py-2' colSpan={5}>Loading...</td>
-                        </tr> : data.map((report, index) => (
+                        </tr> : data.map((report, index) => {
+                          const diff = Math.floor((Date.now() - report.uploaded)/(1000*60*60*24))
+                          console.log(report.uploaded);
+                          return(
                             <tr key={index} className={`${index !== data.length-1 ? 'border-b border-slate-300' : ''} text-sm`}>
                                 <td className='px-4 py-6'>{report.name}</td>
                                 <td className='pr-4'><p className='bg-slate-200 rounded-lg px-4 py-2 block text-center font-semibold'>{report.eye}</p></td>
-                                <td className='text-slate-500 pr-4'>{report.uploaded}</td>
+                                <td className='text-slate-500 pr-4'>{
+                                  diff < 1 ? 'Today' : diff === 1 ? '1  day ago' : diff > 9 ? `${new Date(report.uploaded).toLocaleDateString()}` : `${diff} days ago`
+                                }</td>
                                 <td className='pr-6'><p className='bg-slate-200 rounded-lg px-4 py-2 block text-center font-semibold'>{report.insights}</p></td>
                                 <td className='pr-4'><p className='bg-slate-200 rounded-lg py-2 block text-center font-semibold'>{report.Detections.join(', ')}</p></td>
                                 <td><Link to='/reports' className='text-slate-500 font-bold'>Review</Link></td>
                             </tr>
-                        ))
+                          )
+                        })
                     }
                 </table>
                 </div>

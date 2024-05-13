@@ -42,11 +42,6 @@ const Sidebar = ({addReport}) => {
                   placeholder='Enter patient name' onChange={(e) => {setReport({...report, name: e.target.value})}}/>
                 </div>
                 <div className='flex flex-col'>
-                  <label htmlFor='date' className='text-left'>Date created</label>
-                  <input type='text' id='date' className='w-full p-2 rounded border border-slate-500 outline-none' 
-                  placeholder='Enter date created' onChange={(e) => {setReport({...report, dateCreated: e.target.value})}}/>
-                </div>
-                <div className='flex flex-col'>
                   <label htmlFor='analysis' className='text-left'>AI analysis</label>
                   <input type='text' id='analysis' className='w-full p-2 rounded border border-slate-500 outline-none' 
                   placeholder='Enter analysis' onChange={(e) => {setReport({...report, analysis: e.target.value})}}/>

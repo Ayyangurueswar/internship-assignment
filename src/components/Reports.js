@@ -26,7 +26,7 @@ const Reports = () => {
     setData(newData)
   }
   const addReport = (report) => {
-    writeReportData([...data, report]);
+    writeReportData([...data, {...report, dateCreated: Date.now()}]);
   }
   return (
     <div className='flex w-full'>
@@ -52,11 +52,15 @@ const Reports = () => {
                 {
                     loading ? <tr>
                       <td className='text-2xl text-slate-600 text-center py-2' colSpan={5}>Loading...</td>
-                    </tr> : data.map((report, index) => (
+                    </tr> : data.map((report, index) => {
+                      const diff = Math.floor((Date.now() - report.dateCreated)/(1000*60*60*24))
+                      return(
                         <tr key={report.id} className={`${'border-b border-slate-300'} text-sm`}>
                             <td className='text-slate-500 px-4 py-6'>#{report.id}</td>
                             <td>{report.name}</td>
-                            <td className='text-slate-500'>{report.dateCreated}</td>
+                            <td className='text-slate-500'>{
+                              diff < 1 ? 'Today' : diff === 1 ? '1  day ago' : diff > 9 ? `${new Date(report.dateCreated).toLocaleDateString()}` : `${diff} days ago`
+                            }</td>
                             <td>
                                 <Link to='/' className='bg-slate-200 rounded-lg py-2 w-5/6 block text-center'>{report.analysis}</Link>
                             </td>
@@ -64,7 +68,8 @@ const Reports = () => {
                                 <Link to='/' className='font-bold text-slate-500'>View details</Link>
                             </td>
                         </tr>
-                    ))
+                      )
+                    })
                 }
             </table>
             </div>
